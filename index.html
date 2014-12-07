@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width="device-width," initial-scale=1">
+   <meta name="author" content="The Tor Project, Inc.">
+   <meta name="keywords" content="anonymity online, tor, tor project, censorship circumvention, traffic analysis, anonymous communications research">
+   <title>Tor Project: Debian/Ubuntu Instructions</title>
+   <link rel="icon" href="./images/favicon.ico">
+   <link href="./css/master.css" rel="stylesheet">
+   <!--[if lte IE 8]>
+   <link href="./css/ie8-and-down.css" rel="stylesheet">
+   <![endif]-->
+   <!--[if lte IE 7]>
+   <link href="./css/ie7-and-down.css" rel="stylesheet">
+   <![endif]-->
+   <!--[if IE 6]>
+   <link href="./css/ie6.css" rel="stylesheet">
+   <![endif]-->
+</head>
+<body>
+<div id="wrap">
+  <div id="header">
+    <h1 id="logo"><a href="./index.html.en">Tor</a></h1>
+      <div id="nav">
+        <ul>
+        <li><a href="./index.html.en">Home</a></li>
+<li><a href="./about/overview.html.en">About Tor</a></li>
+<li><a class="active" href="./docs/documentation.html.en">Documentation</a></li>
+<li><a href="./press/press.html.en">Press</a></li>
+<li><a href="https://blog.torproject.org/blog/">Blog</a></li>
+<li><a href="./about/contact.html.en">Contact</a></li>
+        </ul>
+      </div>
+      <!-- END NAV -->
+      <div id="calltoaction">
+        <ul>
+          <li class="donate"><a href="./download/download-easy.html.en">Download</a></li>
+<li class="donate"><a href="./getinvolved/volunteer.html.en">Volunteer</a></li>
+<li class="donate"><a href="./donate/donate.html.en">Donate</a></li>
+        </ul>
+      </div>
+      <!-- END CALLTOACTION -->
+  </div>
+  <!-- END HEADER -->
+<div id="content" class="clearfix">
+  <div id="breadcrumbs">
+    <a href="./index.html.en">Home &raquo; </a>
+    <a href="./docs/documentation.html.en">Documentation &raquo; </a>
+    <a href="./docs/debian.html.en">Debian/Ubuntu Instructions</a>
+  </div>
+  <div id="maincol">
+	<div class="" style="padding-top: 13px; border-top: 0px;">
+<form class="" style="display: block;">
+  <span>Choose your distribution:</span>
+  <select name="distro" id="distro" class="lang" style="display: block;">
+    <option value="Debian" selected="selected">Debian</option>
+    <option value="Ubuntu" selected="selected">Ubuntu</option>
+  </select>
+<span>Version:</span>
+<select name="distver" id="distver" class="lang" style="display: block;">
+    <option value="Wheezy" selected="selected">Wheezy</option>
+    <option value="Jesse" selected="selected">Jesse</option>
+    <option value="Sid" selected="selected">Sid</option>
+</select>
+<select name="distver" id="distver" class="lang" style="display: block;">
+    <option value="Utopic" selected="selected">Utopic</option>
+    <option value="Trusty" selected="selected">Trusty</option>
+    <option value="Precise" selected="selected">Precise</option>
+</select>
+<span>Branch:</span>
+<select name="language" id="win-tbb" class="lang" style="display: block;">
+    <option value="Stable" selected="selected">Stable</option>
+    <option value="Development" selected="selected">Development</option>
+</select>
+<a class="button win-tbb" href="./dist/torbrowser/4.0.1/torbrowser-install-4.0.1_en-US.exe"><span class="strong">Download</span><span class="normal">Tor Browser</span></a>
+  <div class="sig" style="margin-bottom: 5px;">
+    <a class="lang-alt" href="./projects/torbrowser.html.en#downloads">Other Languages</a>
+    (<a class="win-tbb-sig" href="./dist/torbrowser/4.0.1/torbrowser-install-4.0.1_en-US.exe.asc">sig</a>) <a class="siginfo" href="./docs/verifying-signatures.html.en">What's This?</a>
+  </div>
+</form>
+</div>
+<a id="debian"></a>
+<h2><a class="anchor" href="#debian">Option one: Tor on Debian stable,
+Debian sid, or Debian testing</a></h2>
+<br>
+<p>
+If you're using Debian, just run<br>
+<tt>apt-get install tor</tt>
+as root.
+</p>
+<p>
+Note that this might not always give you the latest stable Tor version, but
+you will receive important security fixes. To make sure that you're running
+the latest stable version of Tor, see option two below.
+</p>
+<p>
+Now Tor is installed and running. Move on to <a href="./docs/tor-doc-unix.html.en#using">step two</a> of the "Tor on Linux/Unix"
+instructions.
+</p>
+<hr>
+<a id="ubuntu"></a>
+<a id="packages"></a>
+<h2><a class="anchor" href="#ubuntu">Option two: Tor on Ubuntu or
+Debian</a></h2>
+<br>
+<p>
+<b>Do not use the packages in Ubuntu's universe.</b> In the past they have
+not reliably been updated. That means you could be missing stability
+and security fixes.
+</p>
+<p>
+<b>Raspbian is not Debian.</b> These packages will be confusingly broken
+for Raspbian users, since Raspbian called their architecture armhf but
+Debian already has an armhf. See <a
+href="http://tor.stackexchange.com/questions/242/how-to-run-tor-on-raspbian-on-the-raspberry-pi">this
+post</a> for details.
+</p>
+<p>
+You'll need to set up our package repository before you can fetch
+Tor. First, you need to figure out the name of your distribution. A
+quick command to run is <tt>lsb_release -c</tt> or <tt>cat /etc/debian_version</tt>.
+If in doubt about your Debian version, check <a href="http://www.debian.org/releases/">the Debian website</a>.
+For Ubuntu, ask <a href="https://en.wikipedia.org/wiki/List_of_Ubuntu_releases#Table_of_versions">Wikipedia</a>.
+Then add this line to your
+<tt>/etc/apt/sources.list</tt>
+file:<br>
+<pre style="margin: 1.5em 0 1.5em 2em">
+deb     http://deb.torproject.org/torproject.org &lt;DISTRIBUTION&gt; main
+</pre>
+where you put the codename of your distribution (i.e. lenny, sid,
+saucy or whatever it is)
+in place of &lt;DISTRIBUTION&gt;.
+</p>
+<p>
+Then add the gpg key used to sign the packages by running the following
+commands at your command prompt:
+<pre style="margin: 1.5em 0 1.5em 2em">
+gpg --keyserver keys.gnupg.net --recv 886DDD89
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+</pre>
+Now refresh your sources, running the following command (as root) at your
+command prompt:
+<pre style="margin: 1.5em 0 1.5em 2em">
+apt-get update
+</pre>
+If there are no errors you're good to continue.
+</p>
+<p>
+We provide a Debian package to help you keep our signing key current. It is
+recommended you use it. Install it using
+<pre style="margin: 1.5em 0 1.5em 2em">
+apt-get install deb.torproject.org-keyring
+</pre>
+</p>
+<p>
+To finally install Tor just run:
+<pre style="margin: 1.5em 0 1.5em 2em">
+apt-get install tor
+</pre>
+</p>
+<p>
+Now Tor is installed and running. Move on to <a href="./docs/tor-doc-unix.html.en#using">step two</a> of the "Tor on Linux/Unix"
+instructions.
+</p>
+<p style="font-size: small">
+The DNS name <code>deb.torproject.org</code> is actually a set of independent
+servers in a DNS round robin configuration. If you for some reason cannot
+access it you might try to use the name of one of its part instead. Try
+<code>deb-master.torproject.org</code>,
+<code>mirror.netcologne.de</code> or
+<code>tor.mirror.youam.de</code>.
+</p>
+<hr>
+<a id="development"></a>
+<h2><a class="anchor" href="#development">Option three: Using the
+development branch of Tor on Debian or Ubuntu</a></h2>
+<br>
+<p>If you want to use the <a href="./download/download.html.en#packagediff">development branch</a> of Tor instead
+(more features and more bugs), you need to add a different set of lines
+to your <tt>/etc/apt/sources.list</tt> file:<br>
+<pre style="margin: 1.5em 0 1.5em 2em">
+deb     http://deb.torproject.org/torproject.org &lt;DISTRIBUTION&gt; main
+deb     http://deb.torproject.org/torproject.org tor-experimental-0.2.5.x-&lt;DISTRIBUTION&gt; main
+</pre>
+where you again substitute the name of your distro (lenny,
+sid, saucy, ...) in place of
+&lt;DISTRIBUTION&gt;.
+</p>
+<p>
+Then run the following commands at your command prompt:
+<pre style="margin: 1.5em 0 1.5em 2em">
+gpg --keyserver keys.gnupg.net --recv 886DDD89
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+apt-get update
+apt-get install tor deb.torproject.org-keyring
+</pre>
+</p>
+<p>
+Now Tor is installed and running. Move on to <a href="./docs/tor-doc-unix.html.en#using">step two</a> of the "Tor on Linux/Unix"
+instructions.
+</p>
+<hr>
+<a id="source"></a>
+<h2><a class="anchor" href="#source">Building from source</a></h2>
+<br>
+<p>
+If you want to build your own debs from source you must first add an
+appropriate <tt>deb-src</tt> line to <tt>sources.list</tt>.
+<pre style="margin: 1.5em 0 1.5em 2em">
+deb-src http://deb.torproject.org/torproject.org &lt;DISTRIBUTION&gt; main
+
+deb-src http://deb.torproject.org/torproject.org &lt;DISTRIBUTION&gt; main
+deb-src http://deb.torproject.org/torproject.org tor-experimental-0.2.5.x-&lt;DISTRIBUTION&gt; main
+</pre>
+Substitute the name of your distro (wheezy, sid, trusty, ...) in place of &lt;DISTRIBUTION&gt;. Now refresh your sources by running (as root):
+<pre style="margin: 1.5em 0 1.5em 2em">
+apt-get update
+</pre>
+You also need to install the necessary packages to build your own debs and the
+packages needed to build Tor:
+<pre style="margin: 1.5em 0 1.5em 2em">
+apt-get install build-essential fakeroot devscripts
+apt-get build-dep tor
+</pre>
+Then you can build Tor in ~/debian-packages:
+<pre style="margin: 1.5em 0 1.5em 2em">
+mkdir ~/debian-packages; cd ~/debian-packages
+apt-get source tor
+cd tor-*
+debuild -rfakeroot -uc -us
+cd ..
+</pre>
+Now you can install the new package:
+<pre style="margin: 1.5em 0 1.5em 2em">
+sudo dpkg -i tor_*.deb
+</pre>
+</p>
+<p>
+Now Tor is installed and running. Move on to <a href="./docs/tor-doc-unix.html.en#using">step two</a> of the "Tor on Linux/Unix"
+instructions.
+</p>
+<hr>
+<p>If you have suggestions for improving this document, please <a
+href="./about/contact.html.en">send them to us</a>. Thanks!</p>
+<!-- END MAIN COL -->
+  </div>
+  <div id="sidecol">
+<div class="img-shadow">
+  <div id="sidenav">
+    <ul>
+<li><a href="./docs/documentation.html.en">Documentation Overview</a></li>
+<li class="dropdown"><a class="active" href="./docs/installguide.html.en">Installation Guides</a></li>
+<li>
+<ul>
+<li><a href="./docs/tor-doc-windows.html.en">Installing on Windows</a></li>
+<li><a href="./docs/tor-doc-unix.html.en">Installing on Linux/BSD/Unix</a></li>
+<li class="active"><a class="active" href="./docs/debian.html.en">Installing Tor on Debian/Ubuntu</a></li>
+<li><a href="./docs/debian-vidalia.html.en">Installing Vidalia on Debian/Ubuntu</a></li>
+<li><a href="./docs/rpms.html.en">Installing Tor on Fedora/CentOS</a></li>
+<li><a href="./docs/tor-doc-osx.html.en">Installing Tor on Mac OS X</a></li>
+<li><a href="./docs/android.html.en">Installing Tor on Android</a></li>
+<li><a href="./docs/N900.html.en">Installing Tor on Maemo/N900</a></li>
+<li><a href="./docs/verifying-signatures.html.en">Verify our GPG signatures</a></li>
+</ul>
+</li>
+<li class="dropdown"><a href="./docs/manual.html.en">Manuals</a></li>
+<li><a href="https://trac.torproject.org/projects/tor/wiki/">Tor Wiki</a></li>
+<li><a href="./docs/faq.html.en">General FAQ</a></li>
+<li><a href="./docs/faq-abuse.html.en">Abuse FAQ</a></li>
+<li><a href="./docs/trademark-faq.html.en">Trademark FAQ</a></li>
+<li><a href="./eff/tor-legal-faq.html.en">Tor Legal FAQ</a></li>
+<li><a href="./eff/tor-dmca-response.html.en">Tor DMCA Response</a></li>
+</ul>
+  </div>
+  <!-- END SIDENAV -->
+</div>
+<!-- END IMG-SHADOW -->
+<div class="img-shadow">
+  <div class="infoblock">
+    <h2 class="bulb">Tor Tip</h2>
+    <p>Tor is written for and supported by people like you. <a href="./donate/donate.html.en">Donate today</a>!</p>
+  </div>
+  <!-- END INFOBLOCK -->
+</div>
+<!-- END IMG-SHADOW -->
+  </div>
+  <!-- END SIDECOL -->
+</div>
+<!-- END CONTENT -->
+    <div id="footer">
+    	<div class="onion"><img src="./images/onion.jpg" alt="Tor" width="78" height="118"></div>
+      <div class="about">
+    <p>Trademark, copyright notices, and rules for use by third parties can be found
+    <a href="./docs/trademark-faq.html.en">in our FAQ</a>.</p>
+<!--
+        Last modified: Mon Nov 24 11:52:19 2014 -0500
+        Last compiled: Mon Nov 24 2014 20:09:25 -0600
+-->
+      </div>
+      <!-- END ABOUT -->
+      <div class="col first">
+      	<h4>About Tor</h4>
+        <ul>
+          <li><a href="./about/overview.html.en">What Tor Does</a></li>
+          <li><a href="./about/torusers.html.en">Users of Tor</a></li>
+          <li><a href="./about/corepeople.html.en">Core Tor People</a></li>
+          <li><a href="./about/sponsors.html.en">Sponsors</a></li>
+          <li><a href="./about/contact.html.en">Contact Us</a></li>
+        </ul>
+      </div>
+      <!-- END COL -->
+      <div class="col">
+      	<h4>Get Involved</h4>
+        <ul>
+          <li><a href="./donate/donate.html.en">Donate</a></li>
+          <li><a href="./docs/documentation.html.en#MailingLists">Mailing Lists</a></li>
+          <li><a href="./getinvolved/mirrors.html.en">Mirrors</a></li>
+          <li><a href="./docs/hidden-services.html.en">Hidden Services</a></li>
+          <li><a href="./getinvolved/translation.html.en">Translations</a></li>
+        </ul>
+      </div>
+      <!-- END COL -->
+      <div class="col">
+      	<h4>Documentation</h4>
+        <ul>
+          <li><a href="./docs/tor-manual.html.en">Manuals</a></li>
+          <li><a href="./docs/documentation.html.en">Installation Guides</a></li>
+          <li><a href="https://trac.torproject.org/projects/tor/wiki/">Tor Wiki</a></li>
+          <li><a href="./docs/faq.html.en">General Tor FAQ</a></li>
+        </ul>
+      </div>
+        <div class="col">
+        <a href="https://internetdefenseleague.org/"><img src="./images/InternetDefenseLeague-footer-badge.png" alt="Internet Defense League" width="125" height="125"></a>
+        </div>
+      <!-- END COL -->
+    </div>
+    <!-- END FOOTER -->
+  </div>
+  <!-- END WRAP -->
+</body>
+</html>
